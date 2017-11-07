@@ -1,6 +1,7 @@
 'use strict';
 
 const path                  = require('path');
+const UglifyJSPlugin        = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -30,5 +31,11 @@ module.exports = {
                 }
             },
         ]
-    }
+    },
+    plugins: [
+        new UglifyJSPlugin({
+            sourceMap: true,
+            parallel: true
+        })
+    ]
 };
