@@ -1,4 +1,5 @@
 
+import './test.css'
 
 const c = {
     one: 'two',
