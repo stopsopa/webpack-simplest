@@ -2,3 +2,8 @@ node_modules/
 public/dist/*
 public/buildtime.js
 public/preprocessed.js
+yarn-error.log
+*-tmp-*
+/var/cache-loader
+/public/coverage/
+#.env

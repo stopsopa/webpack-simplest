@@ -3,7 +3,9 @@ const express = require ('express')
 const path = require ('path')
 const os = require ('os')
 
-const app = express()
+const app = express();
+
+const compression   = require('compression');
 
 const env = require('./libs/env');
 
@@ -68,18 +70,19 @@ app.use(requestIp.mw());
 
 const server    = require('http').createServer(app);
 
+app.set('json spaces', 4);
+
 // const io        = require('socket.io')(server); // io
 
-// app.use(compression({filter: (req, res) => {
-//   if (req.headers['x-no-compression']) {
-//       // don't compress responses with this request header
-//       return false
-//   }
+app.use(compression({filter: (req, res) => {
+  if (req.headers['x-no-compression']) {
+      // don't compress responses with this request header
+      return false
+  }
 
-//   // fallback to standard filter function
-//   return compression.filter(req, res)
-// }}));
-
+  // fallback to standard filter function
+  return compression.filter(req, res)
+}}));
 
 app.use(express.static(webpack.public, {
   maxAge: '356 days',
@@ -130,7 +133,7 @@ app.use(require('./controllers')());
 
   const template = require('./webpack/server-template')({
     buildtimefile   : webpack.server.buildtime,
-    tempatefile     : path.resolve(webpack.public, 'index.html'),
+    tempatefile     : path.resolve(webpack.app, 'index.html'),
     isProd          : process.env.NODE_ENV === "production",
   })
 
