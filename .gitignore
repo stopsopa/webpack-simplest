@@ -1,3 +1,4 @@
-/.idea
-node_modules
-yarn-error*
+node_modules/
+public/dist/*
+public/buildtime.js
+public/preprocessed.js

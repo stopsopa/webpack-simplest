@@ -1,24 +1,30 @@
 {
   "dependencies": {
-    "autoprefixer": "^9.1.2",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-plugin-transform-decorators-legacy": "^1.3.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^1.0.0",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "loader-utils": "^1.1.0",
-    "npm-check": "^5.8.0",
-    "postcss-flexbugs-fixes": "^4.1.0",
-    "postcss-loader": "^3.0.0",
-    "style-loader": "^0.22.1",
-    "uglifyjs-webpack-plugin": "^1.3.0",
-    "webpack": "^3.8.1"
+    "cache-loader": "^4.1.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mini-css-extract-plugin": "^1.5.0",
+    "request-ip": "^2.1.3"
   },
-  "scripts": {
-    "build": "node node_modules/.bin/webpack --config webpack.config.js",
-    "watch": "node node_modules/.bin/webpack --config webpack.config.js --watch"
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "colors": "^1.4.0",
+    "css-loader": "^5.2.4",
+    "glob": "^7.1.6",
+    "lodash": "^4.17.21",
+    "mkdirp": "^1.0.4",
+    "nlab": "^0.0.107",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "sass": "^1.32.11",
+    "sass-loader": "^11.0.1",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0"
   }
 }
