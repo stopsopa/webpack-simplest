@@ -9,7 +9,9 @@ const mkdirp = require("mkdirp");
 
 const stringToRegex = require('nlab/stringToRegex');
 
-const webpack = require('../config')('production');
+const env = require('../libs/env');
+
+const webpack = require('../config')(env('NODE_ENV'));
 
 if ( typeof webpack.server.preprocessor !== 'string') {
 
@@ -33,8 +35,6 @@ const result = require('dotenv').config();
 //   true,
 //   "preprocessor.js"
 // );
-
-const env = require('../libs/env');
 
 const EXPOSE_EXTRA_ENV_VARIABLES = (function (e) {
 

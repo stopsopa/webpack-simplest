@@ -12,9 +12,10 @@ const env = require('./libs/env');
 require('dotenv').config()
 
 const host = env("HOST");
+
 const port = env("PORT");
 
-const webpack = require('./config')('production');
+const configWebpack = require('./config')('production');
 
 (function (h) {
   app.use((req, res, next) => {
@@ -84,7 +85,7 @@ app.use(compression({filter: (req, res) => {
   return compression.filter(req, res)
 }}));
 
-app.use(express.static(webpack.public, {
+app.use(express.static(configWebpack.public, {
   maxAge: '356 days',
   index: false,
 }));
@@ -110,59 +111,15 @@ app.use(express.json());
 
 app.use(require('./controllers')());
 
-(function () {
+require('./client/test/server')({
+  app,
+  configWebpack
+});
 
-  const ifDevUseFileModificationTime = (function () {
-
-    if (process.env.NODE_ENV !== "production") {
-
-      try {
-
-        const w           = require('./webpack.config');
-
-        return path.resolve(w.output.path, w.output.filename.replace(/\[name\]/g, Object.keys(w.entry)[0]));
-      }
-      catch (e) {
-
-        log.dump({
-          ifDevUseFileModificationTime_error: e,
-        })
-      }
-    }
-  }());
-
-  const template = require('./webpack/server-template')({
-    buildtimefile   : webpack.server.buildtime,
-    tempatefile     : path.resolve(webpack.app, 'index.html'),
-    isProd          : process.env.NODE_ENV === "production",
-  })
-
-  app.get('*', (req, res) => {
-
-    let mtime;
-
-    if (ifDevUseFileModificationTime) {
-
-      try {
-
-        if (fs.existsSync(ifDevUseFileModificationTime)) {
-
-          const stats = fs.statSync(ifDevUseFileModificationTime);
-
-          mtime = (stats.mtime).toISOString().substring(0, 19).replace('T', '_').replace(/:/g, '-') + '_dev_mtime'
-        }
-      }
-      catch (e) {}
-    }
-
-    let tmp = template({
-      mode            : process.env.NODE_ENV || 'undefined',
-      mtime,
-    });
-
-    res.send(tmp);
-  });
-}());
+require('./client/front/server')({
+  app,
+  configWebpack
+});
 
 // for sockets
 server.listen( // ... we have to listen on server

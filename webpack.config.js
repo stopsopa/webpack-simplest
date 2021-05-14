@@ -1,4 +1,3 @@
-'use strict';
 
 const path                    = require('path');
 
@@ -12,13 +11,13 @@ const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
 
 // const log                     = require('inspc');
 
-const config                  = require('./config.js')(process.env.NODE_ENV);
+const env                     = require('./libs/env');
+
+const config                  = require('./config')(env('NODE_ENV'));
 
 require('colors');
 
 utils.setup(config);
-
-const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   // I'm using mode 'prod..' setting DefinePlugin manually to get rid of evals from transpiled output
@@ -75,7 +74,7 @@ module.exports = {
     ]
   },
   optimization: {
-    minimize: isProd,
+    minimize: config.isProd,
   },
   resolve: {
     extensions: [".js", ".jsx"],

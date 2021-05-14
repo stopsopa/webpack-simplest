@@ -20,6 +20,8 @@ require('dotenv').config();
 
 const env = require('./libs/env');
 
+const isProd = env('NODE_ENV') === 'production';
+
 module.exports = mode => ({
   // just name for this project, it's gonna show up in some places
   name: env('PROJECT_NAME'),
@@ -29,6 +31,7 @@ module.exports = mode => ({
   vardir,
   output,
   public,
+  isProd,
   resolve: [ // where to search by require and files to watch
 
     app,

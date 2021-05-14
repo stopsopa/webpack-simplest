@@ -26,7 +26,9 @@ const se = require('nlab/se');
 
 const th = msg => new Error(`buildtimer.js error: ${msg}`);
 
-const webpack = require('../config')('production');
+const env = require('../libs/env');
+
+const webpack = require('../config')(env('NODE_ENV'));
 
 if ( typeof webpack.server.buildtime !== 'string') {
 
