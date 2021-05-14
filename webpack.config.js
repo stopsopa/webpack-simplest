@@ -1,4 +1,6 @@
 
+require('module-alias/register');
+
 const path                    = require('path');
 
 const utils                   = require('./webpack/utils');
@@ -11,7 +13,7 @@ const { CleanWebpackPlugin }  = require('clean-webpack-plugin');
 
 // const log                     = require('inspc');
 
-const env                     = require('./libs/env');
+const env                     = require('@root/libs/env');
 
 const config                  = require('./config')(env('NODE_ENV'));
 

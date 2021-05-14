@@ -1,4 +1,6 @@
 
+require('module-alias/register')
+
 const path = require("path");
 
 const fs = require("fs");
@@ -9,9 +11,9 @@ const mkdirp = require("mkdirp");
 
 const stringToRegex = require('nlab/stringToRegex');
 
-const env = require('../libs/env');
+const env = require('@root/libs/env');
 
-const webpack = require('../config')(env('NODE_ENV'));
+const webpack = require('@root/config')(env('NODE_ENV'));
 
 if ( typeof webpack.server.preprocessor !== 'string') {
 

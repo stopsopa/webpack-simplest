@@ -9,7 +9,7 @@ const public            = path.resolve(root, 'public');
 
 const node_modules      = path.resolve(root, 'node_modules');
 
-const app               = path.resolve(root, 'client');
+const app               = path.resolve(root, 'app');
 
 const override          = path.resolve(app, 'override');
 
@@ -18,7 +18,7 @@ const output            = path.resolve(public, 'dist');
 
 require('dotenv').config();
 
-const env = require('./libs/env');
+const env = require('@root/libs/env');
 
 const isProd = env('NODE_ENV') === 'production';
 

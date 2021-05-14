@@ -16,7 +16,7 @@ module.exports = ({
 
       try {
 
-        const w           = require('../../webpack.config');
+        const w           = require('@root/webpack.config');
 
         return path.resolve(w.output.path, w.output.filename.replace(/\[name\]/g, Object.keys(w.entry)[0]));
       }
@@ -29,7 +29,7 @@ module.exports = ({
     }
   }());
 
-  const template = require('../../webpack/server-template')({
+  const template = require('@root/webpack/server-template')({
     buildtimefile   : configWebpack.server.buildtime,
     tempatefile     : path.resolve(__dirname, 'index.html'),
     isProd          : configWebpack.isProd

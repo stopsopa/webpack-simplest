@@ -1,13 +1,17 @@
 
-const express = require ('express')
-const path = require ('path')
-const os = require ('os')
+require('module-alias/register');
+
+const express = require ('express');
+
+const path = require ('path');
+
+const os = require ('os');
 
 const app = express();
 
 const compression   = require('compression');
 
-const env = require('./libs/env');
+const env = require('@root/libs/env');
 
 require('dotenv').config()
 
@@ -111,12 +115,12 @@ app.use(express.json());
 
 app.use(require('./controllers')());
 
-require('./client/test/server')({
+require('./app/test/server')({
   app,
   configWebpack
 });
 
-require('./client/front/server')({
+require('./app/front/server')({
   app,
   configWebpack
 });

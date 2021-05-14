@@ -1,0 +1,15 @@
+{
+    "checkJs": true,
+    "compilerOptions": {
+        "target": "es2020",
+        "baseUrl": "./",
+        "paths": {
+            "@root/*": ["./*"],
+            "@app/*": ["app/*"]
+        }
+    },
+    "exclude": ["node_modules"],
+    "typeAcquisition": {
+        "include": ["jest"]
+    }
+}

@@ -10,6 +10,8 @@
  *  if .git directory works
  */
 
+require('module-alias/register')
+
 const path = require("path");
 
 const fs = require("fs");
@@ -26,9 +28,9 @@ const se = require('nlab/se');
 
 const th = msg => new Error(`buildtimer.js error: ${msg}`);
 
-const env = require('../libs/env');
+const env = require('@root/libs/env');
 
-const webpack = require('../config')(env('NODE_ENV'));
+const webpack = require('@root/config')(env('NODE_ENV'));
 
 if ( typeof webpack.server.buildtime !== 'string') {
 
