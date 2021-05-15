@@ -80,6 +80,7 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx"],
+    alias: utils.aliases(),
   },
   plugins: [
     // https://webpack.js.org/guides/production/

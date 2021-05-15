@@ -14,11 +14,16 @@ import {
 //
 // import Page404 from './Pages/Page404';
 
+import Example from '@app/Example';
+
 import './App.scss'
 
 export default function App() {
   return (
-    <div>App...</div>
+    <div>
+      App...
+      <Example />
+    </div>
     // <Switch>
     //   <Route
     //     path="/"

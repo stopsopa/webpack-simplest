@@ -4,6 +4,12 @@ var glob        = require("glob");
 
 var path        = require("path");
 
+var fs          = require("fs");
+
+const isObject  = require('nlab/isObject');
+
+const log = require('inspc');
+
 require('colors');
 
 const th = msg => new Error(`utils.js error: ${msg}`);
@@ -89,6 +95,65 @@ var utils = {
 
         return tmp;
     },
+    aliases: function () {
+
+        const file = path.resolve(this.config.root, 'package.json');
+
+        if ( ! fs.existsSync(file) ) {
+
+            throw th(`file '${file}' doesn't exist`);
+        }
+
+        let json;
+
+        try {
+
+            json = require(file);
+        }
+        catch (e) {
+
+            throw th(`json parsing error in file '${file}', error: ${e}`)
+        }
+
+        let paths;
+
+        try {
+
+            paths = json._moduleAliases;
+        }
+        catch (e) {
+
+            throw th(`can't extract json._moduleAliases from file '${file}'`)
+        }
+
+        if ( ! isObject(paths) ) {
+
+            throw th(`json._moduleAliases from file '${file}' is not an object`)
+        }
+
+        return Object.entries(paths).reduce((acc, [key, p]) => {
+
+            const dir = path.resolve(this.config.root, p) + '/';
+
+            try {
+
+                fs.lstatSync(dir).isDirectory();
+            }
+            catch (e) {
+
+                throw th(`can't determine if '${dir}' is a directory (check '${file}' _moduleAliases), error: ${e}`);
+            }
+
+            if ( ! fs.lstatSync(dir).isDirectory() ) {
+
+                throw th(`'${dir}' is not a directory`);
+            }
+
+            acc[key] = dir;
+
+            return acc;
+        }, {});
+    }
 };
 
 module.exports = utils;
